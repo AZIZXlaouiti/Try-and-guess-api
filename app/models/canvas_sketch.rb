@@ -1,0 +1,2 @@
+class CanvasSketch < ApplicationRecord
+end
