@@ -1,3 +1,3 @@
 class Path < ApplicationRecord
-  belongs_to :canvasSketch
+  belongs_to :sketch
 end

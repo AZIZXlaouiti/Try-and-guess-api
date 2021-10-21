@@ -104,8 +104,9 @@ data =
 ]
 
 a = 0
-while a<data.length
-    Path.create(x:data[a][:x],y:data[a][:y])
+canvas_1 = Sketch.create()
+while a < data.length
+    canvas_1.paths.create(x:data[a][:x],y:data[a][:y])
     puts "a = #{a}"
     a +=1
 end 
