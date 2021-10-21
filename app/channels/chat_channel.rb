@@ -9,8 +9,17 @@ class ChatChannel < ApplicationCable::Channel
     # Any cleanup needed when channel is unsubscribed
   end
   def create(opts)
+    #this will get called first when sending data back to channel 
+    #opts = {"content"=>"up", "action"=>"create"}
+    #params = {"channel"=>"ChatChannel"}
     ChatMessage.create(
       content: opts.fetch('content')
     )
+    
   end
 end
+=begin
+
+points 
+comment line 2
+=end

@@ -21,19 +21,4 @@ ActiveRecord::Schema.define(version: 2021_10_19_201155) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "chat_rooms", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "messages", force: :cascade do |t|
-    t.bigint "chat_room_id", null: false
-    t.string "content"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["chat_room_id"], name: "index_messages_on_chat_room_id"
-  end
-
-  add_foreign_key "messages", "chat_rooms"
 end
