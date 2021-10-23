@@ -8,6 +8,7 @@ class SketchChannel < ApplicationCable::Channel
     # Any cleanup needed when channel is unsubscribed
   end
   def create(opts)
-     byebug
+    #  byebug
+    ActionCable.server.broadcast("sketch_channel",opts["canvas"])
   end
 end
