@@ -10,15 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_21_185510) do
+ActiveRecord::Schema.define(version: 2021_10_26_003124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "chat_messages", force: :cascade do |t|
-    t.text "content"
+    t.bigint "user_id", null: false
+    t.bigint "room_id", null: false
+    t.string "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_chat_messages_on_room_id"
+    t.index ["user_id"], name: "index_chat_messages_on_user_id"
   end
 
   create_table "paths", force: :cascade do |t|
@@ -30,6 +34,12 @@ ActiveRecord::Schema.define(version: 2021_10_21_185510) do
     t.index ["sketch_id"], name: "index_paths_on_sketch_id"
   end
 
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "sketches", force: :cascade do |t|
     t.boolean "drawMode", default: true
     t.string "strokeColor", default: "red"
@@ -38,5 +48,14 @@ ActiveRecord::Schema.define(version: 2021_10_21_185510) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "chat_messages", "rooms"
+  add_foreign_key "chat_messages", "users"
   add_foreign_key "paths", "sketches"
 end

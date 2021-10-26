@@ -11,4 +11,5 @@ class SketchChannel < ApplicationCable::Channel
     #  byebug
     ActionCable.server.broadcast("sketch_channel",opts["canvas"])
   end
+  
 end
