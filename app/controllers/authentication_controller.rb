@@ -9,7 +9,6 @@ class AuthenticationController < ApplicationController
           render json: {
               user: UserSerializer.new(@user),
               token: @token,
-              authenticated: true
           }, status: :accepted 
           else 
               render json: { errors: 'Invalid username or password' }, status: :unauthorized  

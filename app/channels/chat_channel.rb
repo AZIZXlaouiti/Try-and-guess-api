@@ -13,6 +13,8 @@ class ChatChannel < ApplicationCable::Channel
     #opts = {"content"=>"up", "action"=>"create"}
     #params = {"channel"=>"ChatChannel"}
     ChatMessage.create(
+      user_id: 1,
+      room_id: 1,
       content: opts.fetch('content')
     )
     

@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 Sketch.destroy_all 
-
+Room.destroy_all
 data = [
     {
       "x": 262.203125,
@@ -153,8 +153,8 @@ while a < data.length
 end 
 
 
-
-
+Room.create(name:'room_1')
+Room.create(name:'room_2')
 
 
 puts 'DONE SEEDING'
