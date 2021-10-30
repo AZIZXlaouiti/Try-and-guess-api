@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :authorized, only: [:signup]
+  skip_before_action :authorized, only: [:signup , :profile]
   def index
     @users = User.all
     render json: UserSerializer.new(@users)
@@ -9,8 +9,8 @@ class UsersController < ApplicationController
     #signup
     @user = User.new(user_params)
     if @user.save
-      @payload = { user_id: @user.id }
-      @token = encode_token(@payload)  #payload, app_secret , algo
+      payload = { user_id: @user.id }
+      @token = encode_token(payload)  #payload, app_secret , algo
       #token =  # jwt string:
       render json: {
                user: UserSerializer.new(@user),
@@ -21,14 +21,17 @@ class UsersController < ApplicationController
     end
   end
   
-  def get_current_user 
+  def profile 
+    # byebug
     if logged_in?
-      render json: current_user, status: :ok
+      render json: { user: current_user }, status: :ok
     else
       render json: { message: ["Not Logged In"]}, status: :ok
     end
   end
-
+    # def profile 
+    #   render json: {user: UserSerializer.new(current_user)} , status: :accepted
+    # end
 
 
   private

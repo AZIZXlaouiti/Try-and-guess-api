@@ -7,6 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 Sketch.destroy_all 
 Room.destroy_all
+User.destroy_all
+
 data = [
     {
       "x": 262.203125,
