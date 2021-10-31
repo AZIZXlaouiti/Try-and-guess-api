@@ -28,10 +28,6 @@ class ChatChannel < ApplicationCable::Channel
     )
     
   end
-  # def appear
-  #   ActionCable.server.broadcast "chat_channel" , message: 
-  #                 "#{@current_user} has joined !"
-  # end
 end
 =begin
 
