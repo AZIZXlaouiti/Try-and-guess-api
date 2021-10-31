@@ -6,6 +6,7 @@ class AuthenticationController < ApplicationController
           @payload = {user_id: @user.id}
           @token = encode_token(@payload) #payload, app_secret , algo
           #token =  # jwt string:
+          @user.update(online: true)
           render json: {
               user: UserSerializer.new(@user),
               token: @token,
@@ -15,4 +16,5 @@ class AuthenticationController < ApplicationController
       end
         
      end
+   
 end

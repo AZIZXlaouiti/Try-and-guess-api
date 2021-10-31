@@ -6,12 +6,14 @@ class UsersController < ApplicationController
   end
 
   def signup
-    #signup
+    # signup
     @user = User.new(user_params)
     if @user.save
       payload = { user_id: @user.id }
       @token = encode_token(payload)  #payload, app_secret , algo
       #token =  # jwt string:
+      @user.update(online: true)
+      
       render json: {
                user: UserSerializer.new(@user),
                token: @token,
