@@ -3,10 +3,10 @@ class User < ApplicationRecord
     has_many :rooms, through: :chat_messages
     validates_uniqueness_of :username
     has_secure_password
-    def appear(data)
+    def appear()
         self.update(online: true)
     end
-    def disappear(data)
+    def disappear()
         self.update(online: false)
     end
 end
