@@ -27,8 +27,4 @@ class ChatChannel < ApplicationCable::Channel
     )
   end
 end
-=begin
 
-points 
-comment line 2
-=end
