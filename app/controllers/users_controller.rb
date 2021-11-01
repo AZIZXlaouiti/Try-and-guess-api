@@ -12,7 +12,6 @@ class UsersController < ApplicationController
       payload = { user_id: @user.id }
       @token = encode_token(payload)  #payload, app_secret , algo
       #token =  # jwt string:
-      @user.update(online: true)
       
       render json: {
                user: UserSerializer.new(@user),
@@ -24,16 +23,13 @@ class UsersController < ApplicationController
   end
   
   def profile 
-    # byebug
     if logged_in?
       render json: { user: current_user }, status: :ok
     else
       render json: { message: ["Not Logged In"]}, status: :ok
     end
   end
-    # def profile 
-    #   render json: {user: UserSerializer.new(current_user)} , status: :accepted
-    # end
+ 
 
 
   private

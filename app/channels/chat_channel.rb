@@ -5,14 +5,14 @@ class ChatChannel < ApplicationCable::Channel
 
     @user = User.find_by(username: params[:user])
     @user.appear
-    ActionCable.server.broadcast "chat_channel", message: "#{params[:user]} has joined !"
+    ActionCable.server.broadcast "chat_channel", join: "#{params[:user]} has joined !"
   end
 
   def unsubscribed
     puts "unsubscribing now!"
     @user = User.find_by(username: params[:user])
     @user.disappear
-    ActionCable.server.broadcast "chat_channel", message: "#{params[:user]} has left !"
+    ActionCable.server.broadcast "chat_channel", leave: "#{params[:user]} has left !"
     # Any cleanup needed when channel is unsubscribed
   end
 
