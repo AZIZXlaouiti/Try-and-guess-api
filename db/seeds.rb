@@ -103,48 +103,15 @@ data = [
       "y": 47.203125,
     },
   ];
-  # exemple = [
-  #   {
-  #     drawMode: true,
-  #     strokeColor: "red",
-  #     strokeWidth: 7,
-  #     paths: [
-  #       { x: 120, y: 113.203125 },
-  #       { x: 122, y: 113.203125 },
-  #       { x: 126, y: 114.203125 },
-  #       { x: 129, y: 114.203125 },
-  #       { x: 131, y: 115.203125 },
-  #       { x: 134, y: 117.203125 },
-  #       { x: 135, y: 117.203125 },
-  #       { x: 137, y: 117.203125 },
-  #     ],
-  #   },
-  #   {
-  #     drawMode: true,
-  #     strokeColor: "red",
-  #     strokeWidth: 7,
-  #     paths: [
-  #       { x: 167, y: 114.203125 },
-  #       { x: 168, y: 114.203125 },
-  #       { x: 170, y: 114.203125 },
-  #       { x: 172, y: 114.203125 },
-  #       { x: 173, y: 114.203125 },
-  #       { x: 175, y: 114.203125 },
-  #       { x: 176, y: 114.203125 },
-  #       { x: 177, y: 114.203125 },
-  #       { x: 178, y: 115.203125 },
-  #       { x: 179, y: 115.203125 },
-  #       { x: 180, y: 115.203125 },
-  #     ],
-  #   },
-  # ];
-  # path = opts["canvas"]
-  # x = opts["canvas"].length
-  # while x>0
-  #   canvas_1 = Sketch.create()
-  #   canvas_1.create(x:,y:)
-  #      x -=1
-  # end  
+words = [ "ball","cake","storm",
+    "sea","toast","ship",
+    "fence","tree","trumpet",
+    "jail","goat"]
+x = 0    
+while x < words.length
+   Word.create(word:words[x])
+   x+=1
+end 
 
 a = 0
 canvas_1 = Sketch.create()
@@ -153,7 +120,6 @@ while a < data.length
     puts "a = #{a}"
     a +=1
 end 
-
 
 Room.create(name:'room_1')
 Room.create(name:'room_2')

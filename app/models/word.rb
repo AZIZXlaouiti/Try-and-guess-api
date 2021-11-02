@@ -1,3 +1,3 @@
 class Word < ApplicationRecord
-    validates_uniqueness_of :username
+    validates_uniqueness_of :word
 end

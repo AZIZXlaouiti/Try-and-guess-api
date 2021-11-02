@@ -4,7 +4,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :username
       t.string :password_digest
       t.boolean :online , default: false
-
+      t.integer :score , default: 0
       t.timestamps
     end
   end
