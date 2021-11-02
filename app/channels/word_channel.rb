@@ -4,7 +4,7 @@ class WordChannel < ApplicationCable::Channel
     # @user = User.find_by(username: params[:user])
 
     # Word.all.sample
-    stream_from "word_channel"
+    # stream_from "word_channel"
   end
 
   def unsubscribed
