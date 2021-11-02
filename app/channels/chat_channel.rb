@@ -18,7 +18,13 @@ class ChatChannel < ApplicationCable::Channel
   end
   def start 
     @word = Word.all.sample
-    ActionCable.server.broadcast "chat_channel" ,word:@word
+    ActionCable.server.broadcast "chat_channel" ,word:@word , timer:start_timer
+  end
+  def start_timer 
+    60.downto(0) do |i|
+      "#{'%02d' % i}"
+    sleep 1
+  end
   end
   def create(opts)
 
