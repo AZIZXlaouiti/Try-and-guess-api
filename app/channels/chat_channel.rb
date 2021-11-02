@@ -4,7 +4,7 @@ class ChatChannel < ApplicationCable::Channel
     @user = User.find_by(username: params[:user])
     @user.appear
     @connected = User.all.select{|user| user.online}
-    ActionCable.server.broadcast "chat_channel", join: "#{params[:user]} has joined ! ", connected:@connected
+    ActionCable.server.broadcast "chat_channel", join: "#{params[:user]} joined ! ", connected:@connected
   end
 
   def unsubscribed
@@ -12,7 +12,7 @@ class ChatChannel < ApplicationCable::Channel
     @user = User.find_by(username: params[:user])
     @user.disappear
     @connected = User.all.select{|user| user.online}
-    ActionCable.server.broadcast "chat_channel", leave: "#{params[:user]} has left !", connected:@connected
+    ActionCable.server.broadcast "chat_channel", leave: "#{params[:user]} left !", connected:@connected
   end
 
   def create(opts)
