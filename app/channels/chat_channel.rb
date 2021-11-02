@@ -16,7 +16,10 @@ class ChatChannel < ApplicationCable::Channel
     @turn = @connected.first
     ActionCable.server.broadcast "chat_channel", leave: "#{params[:user]} left !", connected:@connected, turn:@turn
   end
-
+  def start 
+    @word = Word.all.sample
+    ActionCable.server.broadcast "chat_channel" ,word:@word
+  end
   def create(opts)
 
     ChatMessage.create(
