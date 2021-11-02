@@ -45,3 +45,4 @@ gem "active_model_serializers", "~> 0.10.12"
 
 gem "dotenv", "~> 2.7"
 gem 'dotenv-rails'
+gem "jsonapi-serializer", "~> 2.2"
