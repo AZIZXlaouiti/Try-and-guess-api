@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_26_003124) do
+ActiveRecord::Schema.define(version: 2021_11_02_144805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2021_10_26_003124) do
     t.bigint "user_id", null: false
     t.bigint "room_id", null: false
     t.string "content"
+    t.boolean "guess", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["room_id"], name: "index_chat_messages_on_room_id"
@@ -52,6 +53,12 @@ ActiveRecord::Schema.define(version: 2021_10_26_003124) do
     t.string "username"
     t.string "password_digest"
     t.boolean "online", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "words", force: :cascade do |t|
+    t.string "word"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
