@@ -22,7 +22,7 @@ class ChatChannel < ApplicationCable::Channel
   end
   def start_timer 
     60.downto(0) do |i|
-      "#{'%02d' % i}"
+       i
     sleep 1
   end
   end
