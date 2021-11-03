@@ -36,6 +36,8 @@ class ChatChannel < ApplicationCable::Channel
   end
   def guess(opts)
     @user = User.find_by(id: opts["user_id"])
+    @user.gain
+    ActionCable.server.broadcast "chat_channel", user: @user
     ChatMessage.create(
           content:"#{@user.username} guessed the word!",
           user_id:opts["user_id"],
@@ -46,17 +48,3 @@ end
 
 
 
-# if opts["content"].downcase  == @@word
-#   ChatMessage.create(
-#     conent:"#{opts["user_id"]}guessed the word!"
-#     user_id:opts["user_id"],
-#     room_id: 1
-#   )
-# else 
-
-#   ChatMessage.create(
-#     user_id:opts["user_id"],
-#     room_id: 1,
-#     content: opts.fetch("content"),
-#   )
-# end

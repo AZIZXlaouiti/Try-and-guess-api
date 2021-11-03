@@ -9,4 +9,7 @@ class User < ApplicationRecord
     def disappear()
         self.update(online: false)
     end
+    def gain()
+        self.update(score: self.score+200)
+    end
 end
