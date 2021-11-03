@@ -17,23 +17,46 @@ class ChatChannel < ApplicationCable::Channel
     ActionCable.server.broadcast "chat_channel", leave: "#{params[:user]} left !", connected:@connected, turn:@turn
   end
   def start 
-    @word = Word.all.sample
-    ActionCable.server.broadcast "chat_channel" ,word:@word
+    @@word = Word.all.sample
+    ActionCable.server.broadcast "chat_channel" ,word:@@word
   end
   def start_timer 
-    60.downto(0) do |x|
-      ActionCable.server.broadcast "chat_channel", timer: x
-      # byebug
+    60.downto(0) do |count|
+      ActionCable.server.broadcast "chat_channel", timer: count
       sleep 1
     end
   end
   def create(opts)
-
+    @user = User.find_by(id: opts["user_id"])
     ChatMessage.create(
-      user_id:opts["user_id"],
-      room_id: 1,
-      content: opts.fetch("content"),
-    )
+        user_id:opts["user_id"],
+        room_id: 1,
+        content: "#{@user.username}: #{opts["content"]}"
+      )
+  end
+  def guess(opts)
+    @user = User.find_by(id: opts["user_id"])
+    ChatMessage.create(
+          content:"#{@user.username} guessed the word!",
+          user_id:opts["user_id"],
+          room_id: 1
+        )
   end
 end
 
+
+
+# if opts["content"].downcase  == @@word
+#   ChatMessage.create(
+#     conent:"#{opts["user_id"]}guessed the word!"
+#     user_id:opts["user_id"],
+#     room_id: 1
+#   )
+# else 
+
+#   ChatMessage.create(
+#     user_id:opts["user_id"],
+#     room_id: 1,
+#     content: opts.fetch("content"),
+#   )
+# end
