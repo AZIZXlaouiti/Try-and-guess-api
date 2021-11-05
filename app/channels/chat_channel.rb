@@ -1,4 +1,5 @@
 class ChatChannel < ApplicationCable::Channel
+  
   def subscribed
     stream_from "chat_channel"
     @user = User.find_by(username: params[:user])
@@ -21,10 +22,11 @@ class ChatChannel < ApplicationCable::Channel
     ActionCable.server.broadcast "chat_channel" ,word:@@word
   end
   def start_timer 
-    60.downto(0) do |count|
+    10.downto(0) do |count|
       ActionCable.server.broadcast "chat_channel", timer: count
-      sleep 1
+      sleep 0.5
     end
+    # ActionCable.server.broadcast "chat_channel", running:false
   end
   def create(opts)
     @user = User.find_by(id: opts["user_id"])
