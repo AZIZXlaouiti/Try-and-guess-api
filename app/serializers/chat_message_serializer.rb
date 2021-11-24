@@ -1,3 +1,4 @@
 class ChatMessageSerializer  < ActiveModel::Serializer
- attributes :user_id, :room_id, :content
+ attributes :content
+ belongs_to :user
 end
