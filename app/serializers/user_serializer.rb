@@ -1,4 +1,4 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes  :username , :online
+  attributes  :id , :username , :online ,:score
   
 end

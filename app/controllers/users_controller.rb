@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     # signup
     @user = User.new(user_params)
     if @user.save
+      @user.appear
       payload = { user_id: @user.id }
       @token = encode_token(payload)  #payload, app_secret , algo
       #token =  # jwt string:

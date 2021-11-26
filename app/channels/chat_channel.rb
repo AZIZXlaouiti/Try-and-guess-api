@@ -7,14 +7,17 @@ class ChatChannel < ApplicationCable::Channel
     # @connected = User.all.select{|user| user.online}
     # @turn = @connected.first
     # ActionCable.server.broadcast "chat_channel", join: "#{params[:user]} joined ! ", connected:@connected , turn:@turn
-    ActionCable.server.broadcast "chat_channel" ,chat_msg: ActiveModel::Serializer::CollectionSerializer.new(ChatMessage.all, serializer: ChatMessageSerializer).as_json
+    ActionCable.server.broadcast "chat_channel" ,
+    chat_msg: ActiveModel::Serializer::CollectionSerializer
+    .new(ChatMessage.all, serializer: ChatMessageSerializer
+    ).as_json
   
   end
 
   def unsubscribed
     puts "unsubscribing now!"
-    # @user = User.find_by(username: params[:user])
-    # @user.disappear
+    @user = User.find_by(username: params[:user])
+    @user.disappear
     # @connected = User.all.select{|user| user.online}
     # @turn = @connected.first
     ActionCable.server.broadcast "chat_channel", leave: "#{params[:user]} left !", connected:@connected, turn:@turn
@@ -35,23 +38,15 @@ class ChatChannel < ApplicationCable::Channel
     
   end
   def create(opts)
+    # byebug
     @user = User.find_by(id: opts["user_id"])
     ChatMessage.create(
         user_id:opts["user_id"],
         room_id: 1,
-        content: "#{@user.username}: #{opts["content"]}"
+        content: "#{opts['content']}"
       )
   end
-  def guess(opts)
-    @user = User.find_by(id: opts["user_id"])
-    @user.gain
-    ActionCable.server.broadcast "chat_channel", user: @user
-    ChatMessage.create(
-          content:"#{@user.username} guessed the word!",
-          user_id:opts["user_id"],
-          room_id: 1
-        )
-  end
+
 end
 
 

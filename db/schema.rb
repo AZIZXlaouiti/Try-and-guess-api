@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_11_02_144805) do
     t.bigint "user_id", null: false
     t.bigint "room_id", null: false
     t.string "content"
-    t.boolean "guess", default: false
+    t.string "chat_type", default: "chat"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["room_id"], name: "index_chat_messages_on_room_id"

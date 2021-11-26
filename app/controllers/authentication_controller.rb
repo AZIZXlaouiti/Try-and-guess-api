@@ -5,7 +5,7 @@ class AuthenticationController < ApplicationController
       @user = User.find_by(username: params[:username])
       if @user&.authenticate(params[:password])
         if !@user.online
-
+          @user.appear
           @payload = { user_id: @user.id }
           @token = encode_token(@payload) #payload, app_secret , algo
           #token =  # jwt string:
