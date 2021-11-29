@@ -20,23 +20,23 @@ class ChatChannel < ApplicationCable::Channel
     @user.disappear
     # @connected = User.all.select{|user| user.online}
     # @turn = @connected.first
-    ActionCable.server.broadcast "chat_channel", leave: "#{params[:user]} left !", connected:@connected, turn:@turn
+    # ActionCable.server.broadcast "chat_channel"
   end
-  def start 
-    @@word = Word.all.sample
-    ActionCable.server.broadcast "chat_channel" ,word:@@word
-  end
-  def start_timer(opts)
-    60.downto(0) do |count|
-      ActionCable.server.broadcast "chat_channel", timer: count
-      sleep 0.5
-  end
+  # def start 
+  #   @@word = Word.all.sample
+  #   ActionCable.server.broadcast "chat_channel" ,word:@@word
+  # end
+  # def start_timer(opts)
+  #   60.downto(0) do |count|
+  #     ActionCable.server.broadcast "chat_channel", timer: count
+  #     sleep 0.5
+  # end
 
-    ActionCable.server.broadcast "chat_channel", timer: "time is out !!" 
-    sleep 2.5
-    ActionCable.server.broadcast "chat_channel", timer: 60
+  #   ActionCable.server.broadcast "chat_channel", timer: "time is out !!" 
+  #   sleep 2.5
+  #   ActionCable.server.broadcast "chat_channel", timer: 60
     
-  end
+  # end
   def create(opts)
     # byebug
     @user = User.find_by(id: opts["user_id"])
