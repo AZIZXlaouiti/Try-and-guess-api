@@ -23,10 +23,10 @@ class ChatChannel < ApplicationCable::Channel
     @user = User.find_by(username: opts["user"])
     @user.disappear
     @connected =  Room.first.users.where('online = ?',true)
-    ActionCable.server.broadcast "room_channel" ,
+    ActionCable.server.broadcast "room_channel" ,room: Room.first,
     members: ActiveModel::Serializer::CollectionSerializer
     .new(@connected, serializer: UserSerializer
-    ).as_json
+    ).as_json 
   end  
 end
 
