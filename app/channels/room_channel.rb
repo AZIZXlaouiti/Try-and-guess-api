@@ -6,10 +6,11 @@ class RoomChannel < ApplicationCable::Channel
       Room.first.members.create(user_id:params[:member][:id])
     end
     @connected =  Room.first.users.where('online = ?',true)
-    ActionCable.server.broadcast "room_channel" ,
-    room: ActiveModel::Serializer::CollectionSerializer
+    ActionCable.server.broadcast "room_channel" ,room: Room.first,
+    members: ActiveModel::Serializer::CollectionSerializer
     .new(@connected, serializer: UserSerializer
-    ).as_json
+    ).as_json 
+    
   end
 
   def unsubscribed
