@@ -13,11 +13,12 @@ class RoomChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    @connected =  Room.first.users.where('online = ?',true)
-    ActionCable.server.broadcast "room_channel" ,
-    room: ActiveModel::Serializer::CollectionSerializer
-    .new(@connected, serializer: UserSerializer
-    ).as_json
     # Any cleanup needed when channel is unsubscribed
+  end
+  def startGame(opts) 
+    # if (opts['start']== true) 
+    #   gameStarted
+    # end
+    # ActionCable.server.broadcast "room_channel" , start: opts["start"].as_json
   end
 end

@@ -10,11 +10,6 @@ class ChatChannel < ApplicationCable::Channel
 
   def unsubscribed
     puts "unsubscribing now!"
-    @connected =  Room.first.users.where('online = ?',true)
-    ActionCable.server.broadcast "room_channel" ,
-    room: ActiveModel::Serializer::CollectionSerializer
-    .new(@connected, serializer: UserSerializer
-    ).as_json
   end
   def create(opts)
     @user = User.find_by(id: opts["user_id"])
@@ -27,6 +22,11 @@ class ChatChannel < ApplicationCable::Channel
   def disconnect(opts)
     @user = User.find_by(username: opts["user"])
     @user.disappear
+    @connected =  Room.first.users.where('online = ?',true)
+    ActionCable.server.broadcast "room_channel" ,
+    room: ActiveModel::Serializer::CollectionSerializer
+    .new(@connected, serializer: UserSerializer
+    ).as_json
   end  
 end
 

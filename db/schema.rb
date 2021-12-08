@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 2021_12_07_175740) do
 
   create_table "rooms", force: :cascade do |t|
     t.string "name"
+    t.boolean "gameStarted", default: false
+    t.integer "round", default: 3
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
