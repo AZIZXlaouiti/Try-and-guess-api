@@ -16,10 +16,17 @@ class RoomChannel < ApplicationCable::Channel
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
   end
-  def startGame(opts) 
-    # if (opts['start']== true) 
-    #   gameStarted
-    # end
-    # ActionCable.server.broadcast "room_channel" , start: opts["start"].as_json
+  def start(opts) 
+    Room.first.update(chosen_word: opts["word"] , game_started: true)
+    ActionCable.server.broadcast "room_channel" ,word: Room.first
+  end
+  def end_timer()
+    Room.first.update( game_started: false)
+    ActionCable.server.broadcast "room_channel" ,word: Room.first
+  end
+  def timer(opts)
+    Room.first.update(counter: opts['counter'])
+    ActionCable.server.broadcast "room_channel" ,counter: Room.first
+ 
   end
 end

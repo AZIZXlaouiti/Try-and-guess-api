@@ -9,6 +9,6 @@ class SketchChannel < ApplicationCable::Channel
   end
   def create(opts)
     #  byebug
-    ActionCable.server.broadcast("sketch_channel",opts["canvas"])
+    ActionCable.server.broadcast("sketch_channel",canvas: opts["canvas"])
   end
 end
